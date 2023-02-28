@@ -1,28 +1,17 @@
-from urllib.parse import urlparse,parse_qs
 import sys
+from urllib.parse import urlparse, parse_qs
 
 
-file_name = sys.argv[1]
-fp = open(file_name)    
-contents = fp.read()
-fp.close()
+with open(sys.argv[1]) as fp:
+    urls = filter(None, fp.read().split('\n'))
 
-urls= list(filter(None,contents.split('\n')))
-
-url_list={}
+url_list = {}
 for url in urls:
     o = urlparse(url)
-    if (o.query != ''):
-        urlkey=o.hostname+o.path+'?'
-        urlvalue=(list(parse_qs(o.query).keys()))  
-        if urlkey in url_list:
-            url_list[urlkey].extend(urlvalue)
-        else:
-            url_list[urlkey]=urlvalue
+    if o.query:
+        urlkey = o.hostname + o.path + '?'
+        urlvalue = set(parse_qs(o.query))
+        url_list.setdefault(urlkey, set()).update(urlvalue)
 
-
-for url in url_list:
-    print('https://'+url+'=FUZZ&'.join(set(url_list[url]))+'=FUZZ')
-
-
-    
+for url, params in url_list.items():
+    print('https://' + url + '=FUZZ&'.join(params) + '=FUZZ')
