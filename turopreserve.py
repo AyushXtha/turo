@@ -4,7 +4,15 @@ from urllib.parse import urlparse, parse_qs, quote, urlencode
 def dedu(url):
     parsed_url = urlparse(url)
     query_dict = parse_qs(parsed_url.query, keep_blank_values=True)
-    deduplicated_query_dict = {k: v[0] for k, v in query_dict.items()}
+   
+    
+    fuzz = sys.argv[2] if len(sys.argv) > 2 else ''
+
+    if fuzz:
+
+        deduplicated_query_dict = {k: fuzz for k, v in query_dict.items()}
+    else:
+        deduplicated_query_dict = {k: v[0] for k, v in query_dict.items()}
 
     new_url = parsed_url._replace(query=urlencode(deduplicated_query_dict, doseq=True)).geturl()
 
