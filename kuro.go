@@ -56,6 +56,8 @@ func main() {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
+    buf := make([]byte, 0, 64*1024)
+    scanner.Buffer(buf, 10240*10240)
 	urls := []string{}
 	for scanner.Scan() {
 		urls = append(urls, scanner.Text())
