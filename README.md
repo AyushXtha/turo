@@ -13,7 +13,7 @@
 GO Version
 ```
 go build kuro.go
-./kuro.go urls.txt
+./kuro urls.txt
 ```
 
 Python Version
