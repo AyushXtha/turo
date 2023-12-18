@@ -10,16 +10,19 @@
    
    ## Usage
 
-   GO Version
-  ```
-    go build kuro.go
-    ./kuro.go urls.txt
-  ```
+GO Version
+```
+go build kuro.go
+./kuro.go urls.txt
+```
 
-    Python Version
-  ``` 
-  python3 turopreserve.py urls.txt
-  ```
+Python Version
+
+
+```
+python3 turopreserve.py urls.txt
+
+```
   
 ### Before
 ```
