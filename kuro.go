@@ -11,13 +11,15 @@ import (
 func dedu(urlStr string, fuzz string) string {
 	parsedURL, err := url.Parse(urlStr)
 	if err != nil {
-		fmt.Println("Error parsing URL:", err)
+		fmt.Println("Error parsing URL:", err,urlStr)
+        fmt.Println(urlStr)
 		return ""
 	}
 	
 	queryDict, err := url.ParseQuery(parsedURL.RawQuery)
 	if err != nil {
-		fmt.Println("Error parsing query parameters:", err)
+		fmt.Println("Error parsing query parameters:", err,urlStr)
+        fmt.Println(urlStr)
 		return ""
 	}
 
@@ -73,7 +75,8 @@ func main() {
 	for _, urlStr := range urls {
 		parsedURL, err := url.Parse(urlStr)
 		if err != nil {
-			fmt.Println("Error parsing URL:", err)
+            fmt.Println("Error parsing URL:", err,": ",urlStr)
+            fmt.Println(urlStr)
 			continue
 		}
 		
@@ -81,7 +84,8 @@ func main() {
 			urlKey := fmt.Sprintf("%s://%s%s?", parsedURL.Scheme, parsedURL.Host, parsedURL.Path)
 			queryDict, err := url.ParseQuery(parsedURL.RawQuery)
 			if err != nil {
-				fmt.Println("Error parsing query parameters:", err)
+                fmt.Println("Error parsing query parameters:", err,": ",urlStr)
+                fmt.Println(urlStr)
 				continue
 			}
 			
