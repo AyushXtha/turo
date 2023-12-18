@@ -9,6 +9,14 @@
   ## Merge parameters together 
    
    ## Usage
+
+   GO Version
+  ```
+    go build kuro.go
+    ./kuro.go urls.txt
+  ```
+
+    Python Version
   ``` 
   python3 turopreserve.py urls.txt
   ```
